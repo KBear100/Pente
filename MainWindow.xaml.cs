@@ -28,8 +28,8 @@ namespace Pente
         {
             yes = Board_Grid.Children.IndexOf(sender as Button);
 
-            int x = yes % 19;
-            int y = yes / 19;
+            int x = yes % 19 + 1;
+            int y = yes / 19 + 1;
 
             MessageBox.Show(x + "," + y);
         }
