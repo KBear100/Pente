@@ -20,6 +20,8 @@ namespace Pente
         int x = 0;
         int y = 0;
 
+        int player = 1;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -31,7 +33,21 @@ namespace Pente
             int x = yes % 19 + 1;
             int y = yes / 19 + 1;
 
+            if (player == 1)
+            {
+                (sender as Button).Background = Brushes.Red;
+                player = 2;
+            }
+            else if (player == 2)
+            {
+                (sender as Button).Background= Brushes.Blue;
+                player = 1;
+
+            }
+
             MessageBox.Show(x + "," + y);
+
+
         }
     }
 
