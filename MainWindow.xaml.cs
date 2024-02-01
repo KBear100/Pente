@@ -16,9 +16,24 @@ namespace Pente
     /// </summary>
     public partial class MainWindow : Window
     {
+        int yes = 0;
+        int x = 0;
+        int y = 0;
+
         public MainWindow()
         {
             InitializeComponent();
         }
+        public void On_Click(object sender, RoutedEventArgs e)
+        {
+            yes = Board_Grid.Children.IndexOf(sender as Button);
+
+            int x = yes % 19;
+            int y = yes / 19;
+
+            MessageBox.Show(x + "," + y);
+        }
     }
+
+
 }
