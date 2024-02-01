@@ -36,11 +36,13 @@ namespace Pente
             if (player == 1)
             {
                 (sender as Button).Background = Brushes.Red;
+                (sender as Button).Click -= On_Click;
                 player = 2;
             }
             else if (player == 2)
             {
                 (sender as Button).Background= Brushes.Blue;
+                (sender as Button).Click -= On_Click;
                 player = 1;
 
             }
