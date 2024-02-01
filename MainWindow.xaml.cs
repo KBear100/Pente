@@ -44,10 +44,6 @@ namespace Pente
                 player = 1;
 
             }
-
-            MessageBox.Show(x + "," + y);
-
-
         }
     }
 
