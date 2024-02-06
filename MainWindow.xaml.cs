@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Security.Cryptography;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -21,8 +22,8 @@ namespace Pente
         int y = 0;
 
         int player = 1;
-        Player player1 = new Player(Brushes.Red);
-        Player player2 = new Player(Brushes.Blue);
+        Player player1 = new Player(Brushes.Red, Board.player1Name);
+        Player player2 = new Player(Brushes.Blue, Board.player2Name);
         Player currentPlayer;
 
         public MainWindow()
@@ -43,9 +44,13 @@ namespace Pente
                 (sender as Button).Click -= On_Click;
                 if (Check_Win(currentIndex)) 
                 {
-                    MessageBox.Show("Player 1 Win");
+                    MessageBox.Show(player1.playerName + " Wins");
+                    Window title = new StartScreen();
+                    title.Show();
+                    this.Close();
                 }
                 else currentPlayer = player2;
+                if (Board.numPlayers == 1) ComputerMove();
             }
             else if (currentPlayer == player2)
             {
@@ -53,11 +58,38 @@ namespace Pente
                 (sender as Button).Click -= On_Click;
                 if (Check_Win(currentIndex))
                 {
-                    MessageBox.Show("Player 2 Win");
+                    MessageBox.Show(player2.playerName + " Wins");
+                    Window title = new StartScreen();
+                    title.Show();
+                    this.Close();
                 }
                 else currentPlayer = player1;
-
             }
+        }
+
+        public void ComputerMove()
+        {
+            Random random = new Random();
+            currentIndex = random.Next(0, Board_Grid.Children.Count + 1);
+            Button button = (Button)Board_Grid.Children[currentIndex];
+
+            while(button.Background == Brushes.Red || button.Background == Brushes.Blue) 
+            {
+                currentIndex = random.Next(0, Board_Grid.Children.Count + 1);
+                button = (Button)Board_Grid.Children[currentIndex];
+            }
+
+            button.Background = currentPlayer.playerColor;
+            button.Click -= On_Click;
+            if (Check_Win(currentIndex))
+            {
+                MessageBox.Show(player2.playerName + " Wins");
+                Window title = new StartScreen();
+                title.Show();
+                this.Close();
+            }
+
+            currentPlayer = player1;
         }
 
         public bool Check_Win(int SelectedIndex)

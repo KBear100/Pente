@@ -1,0 +1,20 @@
+﻿<Window x:Class="Pente.StartScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Pente"
+        mc:Ignorable="d"
+        Title="StartScreen" Height="800" Width="800" Background="#FF826341">
+    <Grid>
+        <Label Content="Pente" HorizontalAlignment="Center" Margin="0,120,0,0" VerticalAlignment="Top" FontSize="100"/>
+        <Button Name="Singleplayer_Btn" Click="SingleplayerOnClick" Content="1 Player" HorizontalAlignment="Center" Margin="0,364,0,0" VerticalAlignment="Top" FontSize="24" Width="120" Cursor="Hand"/>
+        <Button Name="Multiplayer_Btn" Click="MultiplayerOnClick" Content="2 Players" HorizontalAlignment="Center" Margin="0,457,0,0" VerticalAlignment="Top" FontSize="24" Width="120" Cursor="Hand"/>
+        <TextBox Name="Player1Name_TxtBox" HorizontalAlignment="Left" Margin="400,555,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="24" AutomationProperties.HelpText="Player 1 Name" Cursor="Hand" Visibility="Hidden"/>
+        <TextBox Name="Player2Name_TxtBox" HorizontalAlignment="Left" Margin="400,636,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="24" AutomationProperties.HelpText="Player 2 Name" Cursor="Hand" Visibility="Hidden"/>
+        <Button Name="Play_Btn" Click="PlayOnClick" Content="Play" HorizontalAlignment="Center" Margin="0,710,0,0" VerticalAlignment="Top" FontSize="24" Width="120" Cursor="Hand" Visibility="Hidden"/>
+        <Label Name="Player1_Lbl" Content="Player 1 Name:" HorizontalAlignment="Left" Margin="197,551,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Visibility="Hidden"/>
+        <Label Name="Player2_Lbl" Content="Player 2 Name:" HorizontalAlignment="Left" Margin="197,632,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Visibility="Hidden"/>
+
+    </Grid>
+</Window>
