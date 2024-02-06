@@ -32,6 +32,27 @@ namespace Pente
             InitializeComponent();
             currentPlayer = player1;
             enemyPlayer = player2;
+            for (int i = 0; i < Board.boardSize; i++)
+            {
+                for (int j = 0; j < Board.boardSize; j++)
+                {
+                    Button button = new Button();
+                    Thickness margin = new Thickness();
+                    margin.Left = 37 * i;
+                    margin.Right = 37 * i;
+                    margin.Top = 37 * j;
+                    margin.Bottom = 37 * j;
+
+                    button.Click += On_Click;
+                    button.Background = new SolidColorBrush(Colors.Transparent);
+                    button.Width = 30;
+                    button.Height = 30;
+                    button.HorizontalAlignment = HorizontalAlignment.Left;
+                    button.VerticalAlignment = VerticalAlignment.Top;
+                    button.Margin = margin;
+                    Board_Grid.Children.Add(button);
+                }
+            }
         }
         public void On_Click(object sender, RoutedEventArgs e)
         {
@@ -235,7 +256,7 @@ namespace Pente
                         (Board_Grid.Children[SelectedIndex - 1] as Button).Background = Brushes.Transparent;
                         (Board_Grid.Children[SelectedIndex - 1] as Button).Click += On_Click;
                         (Board_Grid.Children[SelectedIndex - 2] as Button).Background = Brushes.Transparent;
-                        (Board_Grid.Children[SelectedIndex - 1] as Button).Click += On_Click;
+                        (Board_Grid.Children[SelectedIndex - 2] as Button).Click += On_Click;
                         break;
                     }
                 }

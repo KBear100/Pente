@@ -15,7 +15,7 @@
         <Button Name="Play_Btn" Click="PlayOnClick" Content="Play" HorizontalAlignment="Center" Margin="0,710,0,0" VerticalAlignment="Top" FontSize="24" Width="120" Cursor="Hand" Visibility="Hidden"/>
         <Label Name="Player1_Lbl" Content="Player 1 Name:" HorizontalAlignment="Left" Margin="197,551,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Visibility="Hidden"/>
         <Label Name="Player2_Lbl" Content="Player 2 Name:" HorizontalAlignment="Left" Margin="197,632,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Visibility="Hidden"/>
-        <Slider Name="Size_Sld" IsSnapToTickEnabled="True" HorizontalAlignment="Left" Margin="305,436,0,0" VerticalAlignment="Top" Width="195" Maximum="39" Minimum="9" Value="19" SmallChange="0" FontSize="20" TickPlacement="BottomRight" TickFrequency="2"/>
-
+        <Slider Name="Size_Sld" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="0" IsSnapToTickEnabled="True" HorizontalAlignment="Left" Margin="305,436,0,0" VerticalAlignment="Top" Width="195" Maximum="39" Minimum="9" Value="19" SmallChange="0" FontSize="20" TickPlacement="BottomRight" TickFrequency="2"/>
+        <Label Content="Board Size" HorizontalAlignment="Center" Margin="0,400,0,0" VerticalAlignment="Top" FontSize="16"/>
     </Grid>
 </Window>
