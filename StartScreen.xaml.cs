@@ -54,6 +54,8 @@ namespace Pente
         {
             TextBox player1NameBox = (TextBox)FindName("Player1Name_TxtBox");
             TextBox player2NameBox = (TextBox)FindName("Player2Name_TxtBox");
+            Slider slider = (Slider)FindName("Size_Sld");
+            Board.boardSize = (int)slider.Value;
 
             Board.player1Name = player1NameBox.Text;
 
