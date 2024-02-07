@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Pente
 {
@@ -28,6 +29,8 @@ namespace Pente
         Player enemyPlayer;
 
         bool firstTurn = true;
+        DispatcherTimer timer = new DispatcherTimer();
+        float time = 0;
 
         public MainWindow()
         {
@@ -42,7 +45,7 @@ namespace Pente
                     Thickness margin = new Thickness();
                     margin.Left = 37 * j;
                     margin.Right = 37 * j;
-                    margin.Top = 37 * i;
+                    margin.Top = 37 * (i + 1);
                     margin.Bottom = 37 * i;
 
                     button.Click += On_Click;
@@ -55,6 +58,9 @@ namespace Pente
                     Board_Grid.Children.Add(button);
                 }
             }
+            timer.Tick += new EventHandler(Timer_Tick);
+            timer.Interval = new TimeSpan(0, 0, 1);
+            timer.Start();
         }
         public void On_Click(object sender, RoutedEventArgs e)
         {
@@ -65,9 +71,9 @@ namespace Pente
 
             if (currentPlayer == player1)
             {
-
                 if (!firstTurn || (firstTurn && (currentIndex == ((Board.boardSize * Board.boardSize) / 2))))
                 {
+                    time = 0;
                     (sender as Button).Background = currentPlayer.playerColor;
                     (sender as Button).Click -= On_Click;
                     CheckCaptureHorizontal(currentIndex);
@@ -97,6 +103,7 @@ namespace Pente
             {
                 if (!firstTurn || ((firstTurn) && Check_ThreeSpaces(currentIndex, x, y)))
                 {
+                    time = 0;
                     (sender as Button).Background = currentPlayer.playerColor;
                     (sender as Button).Click -= On_Click;
                     CheckCaptureHorizontal(currentIndex);
@@ -161,6 +168,21 @@ namespace Pente
             if ((x < centerX + 3 && x > centerX - 3) && y < centerY + 3 && y > centerY - 3) return false;
 
             return true;
+        }
+
+        public void Timer_Tick(object sender, EventArgs e)
+        {
+            time++;
+            Label timeLabel = (Label)FindName("Time_Lbl");
+            timeLabel.Content = time.ToString();
+
+            if(time == 20)
+            {
+                MessageBox.Show("You took to long. You lost your turn.");
+                if(currentPlayer == player1) currentPlayer = player2;
+                else currentPlayer = player1;
+                time = 0;
+            }
         }
 
         public bool Check_Win(int SelectedIndex)
