@@ -38,10 +38,10 @@ namespace Pente
                 {
                     Button button = new Button();
                     Thickness margin = new Thickness();
-                    margin.Left = 37 * i;
-                    margin.Right = 37 * i;
-                    margin.Top = 37 * j;
-                    margin.Bottom = 37 * j;
+                    margin.Left = 37 * j;
+                    margin.Right = 37 * j;
+                    margin.Top = 37 * i;
+                    margin.Bottom = 37 * i;
 
                     button.Click += On_Click;
                     button.Background = new SolidColorBrush(Colors.Transparent);
@@ -145,7 +145,7 @@ namespace Pente
 
             for (int i = 1; count <= 5; i++)
             {
-                if (SelectedIndex + i > 361) break;
+                if (SelectedIndex + i >= (Board.boardSize * Board.boardSize)) break;
                 else if ((Board_Grid.Children[SelectedIndex + i] as Button).Background == currentPlayer.playerColor) count++;
                 else break;
             }
@@ -169,15 +169,15 @@ namespace Pente
 
             for (int i = 1; count <= 5; i++)
             {
-                if (SelectedIndex + i > 361) break;
-                else if ((Board_Grid.Children[SelectedIndex + (19 * i)] as Button).Background == currentPlayer.playerColor) count++;
+                if (SelectedIndex + (Board.boardSize * i) >= Board.boardSize * Board.boardSize) break;
+                else if ((Board_Grid.Children[SelectedIndex + (Board.boardSize * i)] as Button).Background == currentPlayer.playerColor) count++;
                 else break;
             }
 
             for (int i = 1; count <= 5; i++)
             {
-                if (SelectedIndex - i < 0) break;
-                else if ((Board_Grid.Children[SelectedIndex - (19 * i)] as Button).Background == currentPlayer.playerColor) count++;
+                if (SelectedIndex - (Board.boardSize * i) < 0) break;
+                else if ((Board_Grid.Children[SelectedIndex - (Board.boardSize * i)] as Button).Background == currentPlayer.playerColor) count++;
                 else break;
             }
 
@@ -195,25 +195,29 @@ namespace Pente
 
             for (int i = 1; count1 <= 5; i++)
             {
-                if ((Board_Grid.Children[SelectedIndex + (19 * i) + i] as Button).Background == currentPlayer.playerColor) count1++;
+                if ((SelectedIndex + (Board.boardSize * i) + i) >= (Board.boardSize * Board.boardSize)) break;
+                else if ((Board_Grid.Children[SelectedIndex + (Board.boardSize * i) + i] as Button).Background == currentPlayer.playerColor) count1++;
                 else break;
             }
 
             for (int i = 1; count1 <= 5; i++)
             {
-                if ((Board_Grid.Children[SelectedIndex - (19 * i) - i] as Button).Background == currentPlayer.playerColor) count1++;
+                if ((SelectedIndex - (Board.boardSize * i) - i) < 0) break;
+                else if ((Board_Grid.Children[SelectedIndex - (Board.boardSize * i) - i] as Button).Background == currentPlayer.playerColor) count1++;
+                else break;
+            }
+            
+            for (int i = 1; count2 <= 5; i++)
+            {
+                if ((SelectedIndex + (Board.boardSize * i) - i) >= (Board.boardSize * Board.boardSize)) break;
+                else if ((Board_Grid.Children[SelectedIndex + (Board.boardSize * i) - i] as Button).Background == currentPlayer.playerColor) count2++;
                 else break;
             }
 
             for (int i = 1; count2 <= 5; i++)
             {
-                if ((Board_Grid.Children[SelectedIndex + (19 * i) - i] as Button).Background == currentPlayer.playerColor) count2++;
-                else break;
-            }
-
-            for (int i = 1; count2 <= 5; i++)
-            {
-                if ((Board_Grid.Children[SelectedIndex - (19 * i) + i] as Button).Background == currentPlayer.playerColor) count2++;
+                if ((SelectedIndex - (Board.boardSize * i) + i) < 0) break;
+                else if ((Board_Grid.Children[SelectedIndex - (Board.boardSize * i) + i] as Button).Background == currentPlayer.playerColor) count2++;
                 else break;
             }
 
@@ -230,7 +234,8 @@ namespace Pente
 
             for (int i = 1; count <= 2; i++)
             {
-                if ((Board_Grid.Children[SelectedIndex + i] as Button).Background == enemyPlayer.playerColor)
+                if (SelectedIndex + i >= (Board.boardSize * Board.boardSize)) break;
+                else if ((Board_Grid.Children[SelectedIndex + i] as Button).Background == enemyPlayer.playerColor)
                 {
                     count++;
                     if (count == 2 && (Board_Grid.Children[SelectedIndex + 3] as Button).Background == currentPlayer.playerColor)
@@ -248,7 +253,8 @@ namespace Pente
 
             for (int i = 1; count <= 2; i++)
             {
-                if ((Board_Grid.Children[SelectedIndex - i] as Button).Background == enemyPlayer.playerColor)
+                if (SelectedIndex - i < 0) break;
+                else if ((Board_Grid.Children[SelectedIndex - i] as Button).Background == enemyPlayer.playerColor)
                 {
                     count++;
                     if (count == 2 && (Board_Grid.Children[SelectedIndex - 3] as Button).Background == currentPlayer.playerColor)
@@ -270,15 +276,16 @@ namespace Pente
 
             for (int i = 1; count <= 2; i++)
             {
-                if ((Board_Grid.Children[SelectedIndex + (19 * i)] as Button).Background == enemyPlayer.playerColor)
+                if (SelectedIndex + (Board.boardSize * i) >= Board.boardSize * Board.boardSize) break;
+                else if ((Board_Grid.Children[SelectedIndex + (Board.boardSize * i)] as Button).Background == enemyPlayer.playerColor)
                 {
                     count++;
-                    if (count == 2 && (Board_Grid.Children[SelectedIndex + (19 * 3)] as Button).Background == currentPlayer.playerColor)
+                    if (count == 2 && (Board_Grid.Children[SelectedIndex + (Board.boardSize * 3)] as Button).Background == currentPlayer.playerColor)
                     {
-                        (Board_Grid.Children[SelectedIndex + (19)] as Button).Background = Brushes.Transparent;
-                        (Board_Grid.Children[SelectedIndex + (19)] as Button).Click += On_Click;
-                        (Board_Grid.Children[SelectedIndex + (19 * 2)] as Button).Background = Brushes.Transparent;
-                        (Board_Grid.Children[SelectedIndex + (19 * 2)] as Button).Click += On_Click;
+                        (Board_Grid.Children[SelectedIndex + (Board.boardSize)] as Button).Background = Brushes.Transparent;
+                        (Board_Grid.Children[SelectedIndex + (Board.boardSize)] as Button).Click += On_Click;
+                        (Board_Grid.Children[SelectedIndex + (Board.boardSize * 2)] as Button).Background = Brushes.Transparent;
+                        (Board_Grid.Children[SelectedIndex + (Board.boardSize * 2)] as Button).Click += On_Click;
                         break;
                     }
                 }
@@ -287,15 +294,16 @@ namespace Pente
 
             for (int i = 1; count <= 2; i++)
             {
-                if ((Board_Grid.Children[SelectedIndex - (19 * i)] as Button).Background == enemyPlayer.playerColor)
+                if (SelectedIndex - (Board.boardSize * i) < 0) break;
+                else if ((Board_Grid.Children[SelectedIndex - (Board.boardSize * i)] as Button).Background == enemyPlayer.playerColor)
                 {
                     count++;
-                    if (count == 2 && (Board_Grid.Children[SelectedIndex - (19 * 3)] as Button).Background == currentPlayer.playerColor)
+                    if (count == 2 && (Board_Grid.Children[SelectedIndex - (Board.boardSize * 3)] as Button).Background == currentPlayer.playerColor)
                     {
-                        (Board_Grid.Children[SelectedIndex - (19)] as Button).Background = Brushes.Transparent;
-                        (Board_Grid.Children[SelectedIndex - (19)] as Button).Click += On_Click;
-                        (Board_Grid.Children[SelectedIndex - (19 * 2)] as Button).Background = Brushes.Transparent;
-                        (Board_Grid.Children[SelectedIndex - (19 * 2)] as Button).Click += On_Click;
+                        (Board_Grid.Children[SelectedIndex - (Board.boardSize)] as Button).Background = Brushes.Transparent;
+                        (Board_Grid.Children[SelectedIndex - (Board.boardSize)] as Button).Click += On_Click;
+                        (Board_Grid.Children[SelectedIndex - (Board.boardSize)] as Button).Background = Brushes.Transparent;
+                        (Board_Grid.Children[SelectedIndex - (Board.boardSize)] as Button).Click += On_Click;
                         break;
                     }
                 }
@@ -311,15 +319,16 @@ namespace Pente
 
             for (int i = 1; count1 <= 2; i++)
             {
-                if ((Board_Grid.Children[SelectedIndex + (19 * i) + i] as Button).Background == enemyPlayer.playerColor)
+                if ((SelectedIndex + (Board.boardSize * i) + i) >= (Board.boardSize * Board.boardSize)) break;
+                else if ((Board_Grid.Children[SelectedIndex + (Board.boardSize * i) + i] as Button).Background == enemyPlayer.playerColor)
                 {
                     count1++;
-                    if (count1 == 2 && (Board_Grid.Children[SelectedIndex + (19 * 3) + 3] as Button).Background == currentPlayer.playerColor)
+                    if (count1 == 2 && (Board_Grid.Children[SelectedIndex + (Board.boardSize * 3) + 3] as Button).Background == currentPlayer.playerColor)
                     {
-                        (Board_Grid.Children[SelectedIndex + (19) + 1] as Button).Background = Brushes.Transparent;
-                        (Board_Grid.Children[SelectedIndex + (19) + 1] as Button).Click += On_Click;
-                        (Board_Grid.Children[SelectedIndex + (19 * 2) + 2] as Button).Background = Brushes.Transparent;
-                        (Board_Grid.Children[SelectedIndex + (19 * 2) + 2] as Button).Click += On_Click;
+                        (Board_Grid.Children[SelectedIndex + (Board.boardSize) + 1] as Button).Background = Brushes.Transparent;
+                        (Board_Grid.Children[SelectedIndex + (Board.boardSize) + 1] as Button).Click += On_Click;
+                        (Board_Grid.Children[SelectedIndex + (Board.boardSize * 2) + 2] as Button).Background = Brushes.Transparent;
+                        (Board_Grid.Children[SelectedIndex + (Board.boardSize * 2) + 2] as Button).Click += On_Click;
 
                         break;
                     }
@@ -329,15 +338,16 @@ namespace Pente
 
             for (int i = 1; count1 <= 2; i++)
             {
-                if ((Board_Grid.Children[SelectedIndex - (19 * i) - i] as Button).Background == enemyPlayer.playerColor)
+                if ((SelectedIndex - (Board.boardSize * i) - i) < 0) break;
+                else if ((Board_Grid.Children[SelectedIndex - (Board.boardSize * i) - i] as Button).Background == enemyPlayer.playerColor)
                 {
                     count1++;
-                    if (count1 == 2 && (Board_Grid.Children[SelectedIndex - (19 * 3) - 3] as Button).Background == currentPlayer.playerColor)
+                    if (count1 == 2 && (Board_Grid.Children[SelectedIndex - (Board.boardSize * 3) - 3] as Button).Background == currentPlayer.playerColor)
                     {
-                        (Board_Grid.Children[SelectedIndex - (19) - 1] as Button).Background = Brushes.Transparent;
-                        (Board_Grid.Children[SelectedIndex - (19) - 1] as Button).Click += On_Click;
-                        (Board_Grid.Children[SelectedIndex - (19 * 2) - 2] as Button).Background = Brushes.Transparent;
-                        (Board_Grid.Children[SelectedIndex - (19 * 2) - 2] as Button).Click += On_Click;
+                        (Board_Grid.Children[SelectedIndex - (Board.boardSize) - 1] as Button).Background = Brushes.Transparent;
+                        (Board_Grid.Children[SelectedIndex - (Board.boardSize) - 1] as Button).Click += On_Click;
+                        (Board_Grid.Children[SelectedIndex - (Board.boardSize * 2) - 2] as Button).Background = Brushes.Transparent;
+                        (Board_Grid.Children[SelectedIndex - (Board.boardSize * 2) - 2] as Button).Click += On_Click;
 
                         break;
                     }
@@ -347,15 +357,16 @@ namespace Pente
 
             for (int i = 1; count2 <= 2; i++)
             {
-                if ((Board_Grid.Children[SelectedIndex + (19 * i) - i] as Button).Background == enemyPlayer.playerColor)
+                if ((SelectedIndex + (Board.boardSize * i) - i) >= (Board.boardSize * Board.boardSize)) break;
+                else if ((Board_Grid.Children[SelectedIndex + (Board.boardSize * i) - i] as Button).Background == enemyPlayer.playerColor)
                 {
                     count2++;
-                    if (count2 == 2 && (Board_Grid.Children[SelectedIndex + (19 * 3) - 3] as Button).Background == currentPlayer.playerColor)
+                    if (count2 == 2 && (Board_Grid.Children[SelectedIndex + (Board.boardSize * 3) - 3] as Button).Background == currentPlayer.playerColor)
                     {
-                        (Board_Grid.Children[SelectedIndex + (19) - 1] as Button).Background = Brushes.Transparent;
-                        (Board_Grid.Children[SelectedIndex + (19) - 1] as Button).Click += On_Click;
-                        (Board_Grid.Children[SelectedIndex + (19 * 2) - 2] as Button).Background = Brushes.Transparent;
-                        (Board_Grid.Children[SelectedIndex + (19 * 2) - 2] as Button).Click += On_Click;
+                        (Board_Grid.Children[SelectedIndex + (Board.boardSize) - 1] as Button).Background = Brushes.Transparent;
+                        (Board_Grid.Children[SelectedIndex + (Board.boardSize) - 1] as Button).Click += On_Click;
+                        (Board_Grid.Children[SelectedIndex + (Board.boardSize * 2) - 2] as Button).Background = Brushes.Transparent;
+                        (Board_Grid.Children[SelectedIndex + (Board.boardSize * 2) - 2] as Button).Click += On_Click;
 
                         break;
                     }
@@ -365,15 +376,16 @@ namespace Pente
 
             for (int i = 1; count2 <= 2; i++)
             {
-                if ((Board_Grid.Children[SelectedIndex - (19 * i) + i] as Button).Background == enemyPlayer.playerColor)
+                if ((SelectedIndex - (Board.boardSize * i) + i) < 0) break;
+                else if ((Board_Grid.Children[SelectedIndex - (Board.boardSize * i) + i] as Button).Background == enemyPlayer.playerColor)
                 {
                     count2++;
-                    if (count2 == 2 && (Board_Grid.Children[SelectedIndex - (19 * 3) + 3] as Button).Background == currentPlayer.playerColor)
+                    if (count2 == 2 && (Board_Grid.Children[SelectedIndex - (Board.boardSize * 3) + 3] as Button).Background == currentPlayer.playerColor)
                     {
-                        (Board_Grid.Children[SelectedIndex - (19) + 1] as Button).Background = Brushes.Transparent;
-                        (Board_Grid.Children[SelectedIndex - (19) + 1] as Button).Click += On_Click;
-                        (Board_Grid.Children[SelectedIndex - (19 * 2) + 2] as Button).Background = Brushes.Transparent;
-                        (Board_Grid.Children[SelectedIndex - (19 * 2) + 2] as Button).Click += On_Click;
+                        (Board_Grid.Children[SelectedIndex - (Board.boardSize) + 1] as Button).Background = Brushes.Transparent;
+                        (Board_Grid.Children[SelectedIndex - (Board.boardSize) + 1] as Button).Click += On_Click;
+                        (Board_Grid.Children[SelectedIndex - (Board.boardSize * 2) + 2] as Button).Background = Brushes.Transparent;
+                        (Board_Grid.Children[SelectedIndex - (Board.boardSize * 2) + 2] as Button).Click += On_Click;
 
                         break;
                     }
