@@ -27,6 +27,8 @@ namespace Pente
         Player currentPlayer;
         Player enemyPlayer;
 
+        bool firstTurn = true;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -58,48 +60,65 @@ namespace Pente
         {
             currentIndex = Board_Grid.Children.IndexOf(sender as Button);
 
-            int x = currentIndex % 19 + 1;
-            int y = currentIndex / 19 + 1;
+            int x = currentIndex % Board.boardSize + 1;
+            int y = currentIndex / Board.boardSize + 1;
 
             if (currentPlayer == player1)
             {
-                (sender as Button).Background = currentPlayer.playerColor;
-                (sender as Button).Click -= On_Click;
-                CheckCaptureHorizontal(currentIndex);
-                CheckCaptureVertical(currentIndex);
-                CheckCaptureDiagonal(currentIndex);
-                if (Check_Win(currentIndex))
+
+                if (!firstTurn || (firstTurn && (currentIndex == ((Board.boardSize * Board.boardSize) / 2))))
                 {
-                    MessageBox.Show(player1.playerName + " Wins");
-                    Window title = new StartScreen();
-                    title.Show();
-                    this.Close();
+                    (sender as Button).Background = currentPlayer.playerColor;
+                    (sender as Button).Click -= On_Click;
+                    CheckCaptureHorizontal(currentIndex);
+                    CheckCaptureVertical(currentIndex);
+                    CheckCaptureDiagonal(currentIndex);
+                    if (Check_Win(currentIndex))
+                    {
+                        MessageBox.Show(player1.playerName + " Wins");
+                        Window title = new StartScreen();
+                        title.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        currentPlayer = player2;
+                        enemyPlayer = player1;
+                    }
+                    if (Board.numPlayers == 1) ComputerMove();
                 }
                 else
                 {
-                    currentPlayer = player2;
-                    enemyPlayer = player1;
+                    MessageBox.Show("Player 1 must select the center square");
                 }
-                if (Board.numPlayers == 1) ComputerMove();
+
             }
             else if (currentPlayer == player2)
             {
-                (sender as Button).Background = currentPlayer.playerColor;
-                (sender as Button).Click -= On_Click;
-                CheckCaptureHorizontal(currentIndex);
-                CheckCaptureVertical(currentIndex);
-                CheckCaptureDiagonal(currentIndex);
-                if (Check_Win(currentIndex))
+                if (!firstTurn || ((firstTurn) && Check_ThreeSpaces(currentIndex, x, y)))
                 {
-                    MessageBox.Show(player2.playerName + " Wins");
-                    Window title = new StartScreen();
-                    title.Show();
-                    this.Close();
+                    (sender as Button).Background = currentPlayer.playerColor;
+                    (sender as Button).Click -= On_Click;
+                    CheckCaptureHorizontal(currentIndex);
+                    CheckCaptureVertical(currentIndex);
+                    CheckCaptureDiagonal(currentIndex);
+                    if (Check_Win(currentIndex))
+                    {
+                        MessageBox.Show(player2.playerName + " Wins");
+                        Window title = new StartScreen();
+                        title.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        currentPlayer = player1;
+                        enemyPlayer = player2;
+                        if (firstTurn) firstTurn = false;
+                    }
                 }
                 else
                 {
-                    currentPlayer = player1;
-                    enemyPlayer = player2;
+                    MessageBox.Show("Player 2 must get gud");
                 }
             }
         }
@@ -107,10 +126,13 @@ namespace Pente
         public void ComputerMove()
         {
             Random random = new Random();
-            currentIndex = random.Next(0, Board_Grid.Children.Count + 1);
+            currentIndex = random.Next(0, Board_Grid.Children.Count);
             Button button = (Button)Board_Grid.Children[currentIndex];
 
-            while (button.Background == Brushes.Red || button.Background == Brushes.Blue)
+            int x = currentIndex % Board.boardSize + 1;
+            int y = currentIndex / Board.boardSize + 1;
+
+            while ((button.Background == Brushes.Red || button.Background == Brushes.Blue) && ((firstTurn) && Check_ThreeSpaces(currentIndex, x, y)))
             {
                 currentIndex = random.Next(0, Board_Grid.Children.Count + 1);
                 button = (Button)Board_Grid.Children[currentIndex];
@@ -128,6 +150,17 @@ namespace Pente
 
             currentPlayer = player1;
             enemyPlayer = player2;
+            if (firstTurn) firstTurn = false;
+        }
+
+        public bool Check_ThreeSpaces(int selectedIndex, int x, int y)
+        {
+            int centerX = Board.boardSize / 2 + 1;
+            int centerY = Board.boardSize / 2 + 1;
+
+            if ((x < centerX + 3 && x > centerX - 3) && y < centerY + 3 && y > centerY - 3) return false;
+
+            return true;
         }
 
         public bool Check_Win(int SelectedIndex)
@@ -206,7 +239,7 @@ namespace Pente
                 else if ((Board_Grid.Children[SelectedIndex - (Board.boardSize * i) - i] as Button).Background == currentPlayer.playerColor) count1++;
                 else break;
             }
-            
+
             for (int i = 1; count2 <= 5; i++)
             {
                 if ((SelectedIndex + (Board.boardSize * i) - i) >= (Board.boardSize * Board.boardSize)) break;
