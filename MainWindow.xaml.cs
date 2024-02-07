@@ -299,7 +299,14 @@ namespace Pente
                         (Board_Grid.Children[SelectedIndex + 1] as Button).Click += On_Click;
                         (Board_Grid.Children[SelectedIndex + 2] as Button).Background = Brushes.Transparent;
                         (Board_Grid.Children[SelectedIndex + 2] as Button).Click += On_Click;
-
+                        currentPlayer.captureCount++;
+                        if(currentPlayer.captureCount == 5)
+                        {
+                            MessageBox.Show(currentPlayer.playerName + " Wins!");
+                            Window title = new StartScreen();
+                            title.Show();
+                            this.Close();
+                        }
                         break;
                     }
                 }
@@ -318,6 +325,14 @@ namespace Pente
                         (Board_Grid.Children[SelectedIndex - 1] as Button).Click += On_Click;
                         (Board_Grid.Children[SelectedIndex - 2] as Button).Background = Brushes.Transparent;
                         (Board_Grid.Children[SelectedIndex - 2] as Button).Click += On_Click;
+                        currentPlayer.captureCount++;
+                        if (currentPlayer.captureCount == 5)
+                        {
+                            MessageBox.Show(currentPlayer.playerName + " Wins!");
+                            Window title = new StartScreen();
+                            title.Show();
+                            this.Close();
+                        }
                         break;
                     }
                 }
@@ -341,6 +356,14 @@ namespace Pente
                         (Board_Grid.Children[SelectedIndex + (Board.boardSize)] as Button).Click += On_Click;
                         (Board_Grid.Children[SelectedIndex + (Board.boardSize * 2)] as Button).Background = Brushes.Transparent;
                         (Board_Grid.Children[SelectedIndex + (Board.boardSize * 2)] as Button).Click += On_Click;
+                        currentPlayer.captureCount++;
+                        if (currentPlayer.captureCount == 5)
+                        {
+                            MessageBox.Show(currentPlayer.playerName + " Wins!");
+                            Window title = new StartScreen();
+                            title.Show();
+                            this.Close();
+                        }
                         break;
                     }
                 }
@@ -359,6 +382,14 @@ namespace Pente
                         (Board_Grid.Children[SelectedIndex - (Board.boardSize)] as Button).Click += On_Click;
                         (Board_Grid.Children[SelectedIndex - (Board.boardSize)] as Button).Background = Brushes.Transparent;
                         (Board_Grid.Children[SelectedIndex - (Board.boardSize)] as Button).Click += On_Click;
+                        currentPlayer.captureCount++;
+                        if (currentPlayer.captureCount == 5)
+                        {
+                            MessageBox.Show(currentPlayer.playerName + " Wins!");
+                            Window title = new StartScreen();
+                            title.Show();
+                            this.Close();
+                        }
                         break;
                     }
                 }
@@ -384,7 +415,14 @@ namespace Pente
                         (Board_Grid.Children[SelectedIndex + (Board.boardSize) + 1] as Button).Click += On_Click;
                         (Board_Grid.Children[SelectedIndex + (Board.boardSize * 2) + 2] as Button).Background = Brushes.Transparent;
                         (Board_Grid.Children[SelectedIndex + (Board.boardSize * 2) + 2] as Button).Click += On_Click;
-
+                        currentPlayer.captureCount++;
+                        if (currentPlayer.captureCount == 5)
+                        {
+                            MessageBox.Show(currentPlayer.playerName + " Wins!");
+                            Window title = new StartScreen();
+                            title.Show();
+                            this.Close();
+                        }
                         break;
                     }
                 }
@@ -403,7 +441,14 @@ namespace Pente
                         (Board_Grid.Children[SelectedIndex - (Board.boardSize) - 1] as Button).Click += On_Click;
                         (Board_Grid.Children[SelectedIndex - (Board.boardSize * 2) - 2] as Button).Background = Brushes.Transparent;
                         (Board_Grid.Children[SelectedIndex - (Board.boardSize * 2) - 2] as Button).Click += On_Click;
-
+                        currentPlayer.captureCount++;
+                        if (currentPlayer.captureCount == 5)
+                        {
+                            MessageBox.Show(currentPlayer.playerName + " Wins!");
+                            Window title = new StartScreen();
+                            title.Show();
+                            this.Close();
+                        }
                         break;
                     }
                 }
@@ -422,7 +467,14 @@ namespace Pente
                         (Board_Grid.Children[SelectedIndex + (Board.boardSize) - 1] as Button).Click += On_Click;
                         (Board_Grid.Children[SelectedIndex + (Board.boardSize * 2) - 2] as Button).Background = Brushes.Transparent;
                         (Board_Grid.Children[SelectedIndex + (Board.boardSize * 2) - 2] as Button).Click += On_Click;
-
+                        currentPlayer.captureCount++;
+                        if (currentPlayer.captureCount == 5)
+                        {
+                            MessageBox.Show(currentPlayer.playerName + " Wins!");
+                            Window title = new StartScreen();
+                            title.Show();
+                            this.Close();
+                        }
                         break;
                     }
                 }
@@ -441,7 +493,14 @@ namespace Pente
                         (Board_Grid.Children[SelectedIndex - (Board.boardSize) + 1] as Button).Click += On_Click;
                         (Board_Grid.Children[SelectedIndex - (Board.boardSize * 2) + 2] as Button).Background = Brushes.Transparent;
                         (Board_Grid.Children[SelectedIndex - (Board.boardSize * 2) + 2] as Button).Click += On_Click;
-
+                        currentPlayer.captureCount++;
+                        if (currentPlayer.captureCount == 5)
+                        {
+                            MessageBox.Show(currentPlayer.playerName + " Wins!");
+                            Window title = new StartScreen();
+                            title.Show();
+                            this.Close();
+                        }
                         break;
                     }
                 }

@@ -19,6 +19,6 @@ namespace Pente
 
         public Brush playerColor;
         public string playerName;
-
+        public int captureCount = 0;
     }
 }
