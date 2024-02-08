@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Pente
 {
@@ -71,6 +71,40 @@ namespace Pente
             Window mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
+        }
+
+        public void Load_Click(object sender, EventArgs e)
+        {
+            Board.loadedGame = true;
+            try
+            {
+                string docPath = Environment.CurrentDirectory;
+                using (StreamReader streamReader = new StreamReader(Path.Combine(docPath, "PenteSaveData.txt")))
+                {
+                    Board.boardSize = int.Parse(streamReader.ReadLine());
+                    streamReader.ReadLine();
+                    string temp = streamReader.ReadLine();
+                    while (temp != "Blue")
+                    {
+                        Board.redIndexs.Add(int.Parse(temp));
+                        temp = streamReader.ReadLine();
+                    }
+                    temp = streamReader.ReadLine();
+                    while(temp != null)
+                    {
+                        Board.blueIndexs.Add(int.Parse(temp));
+                        temp = streamReader.ReadLine();
+                    }
+                }
+
+                Window mainWindow = new MainWindow();
+                mainWindow.Show();
+                this.Close();
+            }
+            catch (IOException error)
+            {
+                MessageBox.Show(error.Message);
+            }
         }
     }
 }

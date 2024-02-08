@@ -8,6 +8,7 @@
         Title="MainWindow" Height="800" Width="800" Background="#FF826341">
     <Grid Name="Board_Grid" Width="5000" Height="5000">
         <Label Name="Time_Lbl" Content="Label" HorizontalAlignment="Left" Margin="366,0,0,0" VerticalAlignment="Top"/>
+        <Button Name="Save_Btn" Click="Save_Click" Content="Save" HorizontalAlignment="Left" Margin="754,6,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

@@ -17,5 +17,6 @@
         <Label Name="Player2_Lbl" Content="Player 2 Name:" HorizontalAlignment="Left" Margin="197,632,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Visibility="Hidden"/>
         <Slider Name="Size_Sld" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="0" IsSnapToTickEnabled="True" HorizontalAlignment="Left" Margin="305,436,0,0" VerticalAlignment="Top" Width="195" Maximum="39" Minimum="9" Value="19" SmallChange="0" FontSize="20" TickPlacement="BottomRight" TickFrequency="2"/>
         <Label Content="Board Size" HorizontalAlignment="Center" Margin="0,400,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Button x:Name="Load_Btn" Click="Load_Click" Content="Load" HorizontalAlignment="Left" Margin="342,351,0,0" VerticalAlignment="Top" FontSize="24" Width="120" Cursor="Hand"/>
     </Grid>
 </Window>

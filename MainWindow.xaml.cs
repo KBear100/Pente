@@ -8,8 +8,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.IO;
 
 namespace Pente
 {
@@ -58,6 +58,23 @@ namespace Pente
                     Board_Grid.Children.Add(button);
                 }
             }
+            if(Board.loadedGame)
+            {
+                firstTurn = false;
+                for (int i = Board.nonButtons; i < Board_Grid.Children.Count; i++)
+                {
+                    if (Board.redIndexs.Contains(i))
+                    {
+                        (Board_Grid.Children[i] as Button).Background = Brushes.Red;
+                        (Board_Grid.Children[i] as Button).Click -= On_Click;
+                    }
+                    if (Board.blueIndexs.Contains(i))
+                    {
+                        (Board_Grid.Children[i] as Button).Background = Brushes.Blue;
+                        (Board_Grid.Children[i] as Button).Click -= On_Click;
+                    }
+                }
+            }
             timer.Tick += new EventHandler(Timer_Tick);
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Start();
@@ -71,7 +88,7 @@ namespace Pente
 
             if (currentPlayer == player1)
             {
-                if (!firstTurn || (firstTurn && (currentIndex == ((Board.boardSize * Board.boardSize) / 2) + 1)))
+                if (!firstTurn || (firstTurn && (currentIndex == ((Board.boardSize * Board.boardSize) / 2) + Board.nonButtons)))
                 {
                     time = 0;
                     (sender as Button).Background = currentPlayer.playerColor;
@@ -133,7 +150,7 @@ namespace Pente
         public void ComputerMove()
         {
             Random random = new Random();
-            currentIndex = random.Next(0, Board_Grid.Children.Count);
+            currentIndex = random.Next(Board.nonButtons, Board_Grid.Children.Count);
             //Button button = (Button)Board_Grid.Children[currentIndex];
             Button button = (Board_Grid.Children[currentIndex]) as Button;
 
@@ -142,7 +159,7 @@ namespace Pente
 
             while ((button.Background == Brushes.Red || button.Background == Brushes.Blue) || ((firstTurn) && (!Check_ThreeSpaces(currentIndex, x, y))))
             {
-                currentIndex = random.Next(0, Board_Grid.Children.Count);
+                currentIndex = random.Next(Board.nonButtons, Board_Grid.Children.Count);
                 x = currentIndex % Board.boardSize + 1;
                 y = currentIndex / Board.boardSize + 1;
 
@@ -513,7 +530,38 @@ namespace Pente
             }
         }
 
+        public void Save_Click(object sender, EventArgs e)
+        {
+            List<string> saveData = new List<string>();
+            saveData.Add(Board.boardSize.ToString());
+            saveData.Add("Red");
+            for(int i = Board.nonButtons; i < Board_Grid.Children.Count; i++)
+            {
+                if ((Board_Grid.Children[i] as Button).Background == Brushes.Red) 
+                {
+                    saveData.Add(i.ToString());
+                }
+            }
+            saveData.Add("Blue");
+            for (int i = Board.nonButtons; i < Board_Grid.Children.Count; i++)
+            {
+                if ((Board_Grid.Children[i] as Button).Background == Brushes.Blue)
+                {
+                    saveData.Add(i.ToString());
+                }
+            }
+
+            string docPath = Environment.CurrentDirectory;
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "PenteSaveData.txt")))
+            {
+                foreach(string item in saveData)
+                {
+                    outputFile.WriteLine(item);
+                }
+            }
+
+            MessageBox.Show("Game Saved");
+            Close();
+        }
     }
-
-
 }
