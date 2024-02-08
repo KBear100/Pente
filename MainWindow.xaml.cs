@@ -71,7 +71,7 @@ namespace Pente
 
             if (currentPlayer == player1)
             {
-                if (!firstTurn || (firstTurn && (currentIndex == ((Board.boardSize * Board.boardSize) / 2))))
+                if (!firstTurn || (firstTurn && (currentIndex == ((Board.boardSize * Board.boardSize) / 2) + 1)))
                 {
                     time = 0;
                     (sender as Button).Background = currentPlayer.playerColor;
@@ -134,15 +134,20 @@ namespace Pente
         {
             Random random = new Random();
             currentIndex = random.Next(0, Board_Grid.Children.Count);
-            Button button = (Button)Board_Grid.Children[currentIndex];
+            //Button button = (Button)Board_Grid.Children[currentIndex];
+            Button button = (Board_Grid.Children[currentIndex]) as Button;
 
             int x = currentIndex % Board.boardSize + 1;
             int y = currentIndex / Board.boardSize + 1;
 
-            while ((button.Background == Brushes.Red || button.Background == Brushes.Blue) && ((firstTurn) && Check_ThreeSpaces(currentIndex, x, y)))
+            while ((button.Background == Brushes.Red || button.Background == Brushes.Blue) || ((firstTurn) && Check_ThreeSpaces(currentIndex, x, y)))
             {
-                currentIndex = random.Next(0, Board_Grid.Children.Count + 1);
-                button = (Button)Board_Grid.Children[currentIndex];
+                currentIndex = random.Next(0, Board_Grid.Children.Count);
+                x = currentIndex % Board.boardSize + 1;
+                y = currentIndex / Board.boardSize + 1;
+
+                //button = (Button)Board_Grid.Children[currentIndex];
+                button = (Board_Grid.Children[currentIndex]) as Button;
             }
 
             button.Background = currentPlayer.playerColor;
@@ -165,7 +170,7 @@ namespace Pente
             int centerX = Board.boardSize / 2 + 1;
             int centerY = Board.boardSize / 2 + 1;
 
-            if ((x < centerX + 3 && x > centerX - 3) && y < centerY + 3 && y > centerY - 3) return false;
+            if ((x < centerX + 3 && x > centerX - 3) && (y < centerY + 3 && y > centerY - 3)) return false;
 
             return true;
         }
@@ -176,10 +181,10 @@ namespace Pente
             Label timeLabel = (Label)FindName("Time_Lbl");
             timeLabel.Content = time.ToString();
 
-            if(time == 20)
+            if (time == 20)
             {
                 MessageBox.Show("You took to long. You lost your turn.");
-                if(currentPlayer == player1) currentPlayer = player2;
+                if (currentPlayer == player1) currentPlayer = player2;
                 else currentPlayer = player1;
                 time = 0;
             }
@@ -300,7 +305,7 @@ namespace Pente
                         (Board_Grid.Children[SelectedIndex + 2] as Button).Background = Brushes.Transparent;
                         (Board_Grid.Children[SelectedIndex + 2] as Button).Click += On_Click;
                         currentPlayer.captureCount++;
-                        if(currentPlayer.captureCount == 5)
+                        if (currentPlayer.captureCount == 5)
                         {
                             MessageBox.Show(currentPlayer.playerName + " Wins!");
                             Window title = new StartScreen();
