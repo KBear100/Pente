@@ -19,29 +19,43 @@ namespace Pente
     /// </summary>
     public partial class StartScreen : Window
     {
+        Button playButton; // = (Button)FindName("Play_Btn");
+        Label player1Label;// = (Label)FindName("Player1_Lbl");
+        Label player2Label;// = (Label)FindName("Player2_Lbl");
+        TextBox player1NameBox;// = (TextBox)FindName("Player1Name_TxtBox");
+        TextBox player2NameBox;// = (TextBox)FindName("Player2Name_TxtBox");
+
         public StartScreen()
         {
             InitializeComponent();
+            playButton = (Button)FindName("Play_Btn");
+            player1Label = (Label)FindName("Player1_Lbl");
+            player2Label = (Label)FindName("Player2_Lbl");
+            player1NameBox = (TextBox)FindName("Player1Name_TxtBox");
+            player2NameBox = (TextBox)FindName("Player2Name_TxtBox");
         }
 
         public void SingleplayerOnClick(object sender, RoutedEventArgs e)
         {
-            Button playButton = (Button)FindName("Play_Btn");
-            Label player1Label = (Label)FindName("Player1_Lbl");
-            TextBox player1NameBox = (TextBox)FindName("Player1Name_TxtBox");
+            //Button playButton = (Button)FindName("Play_Btn");
+            //Label player1Label = (Label)FindName("Player1_Lbl");
+            //TextBox player1NameBox = (TextBox)FindName("Player1Name_TxtBox");
             playButton.Visibility = Visibility.Visible;
             player1Label.Visibility = Visibility.Visible;
             player1NameBox.Visibility = Visibility.Visible;
+            player2Label.Visibility = Visibility.Hidden;
+            player2NameBox.Visibility = Visibility.Hidden;
+
             Board.numPlayers = 1;
         }
         
         public void MultiplayerOnClick(object sender, RoutedEventArgs e)
         {
-            Button playButton = (Button)FindName("Play_Btn");
-            Label player1Label = (Label)FindName("Player1_Lbl");
-            Label player2Label = (Label)FindName("Player2_Lbl");
-            TextBox player1NameBox = (TextBox)FindName("Player1Name_TxtBox");
-            TextBox player2NameBox = (TextBox)FindName("Player2Name_TxtBox");
+            //Button playButton = (Button)FindName("Play_Btn");
+            //Label player1Label = (Label)FindName("Player1_Lbl");
+            //Label player2Label = (Label)FindName("Player2_Lbl");
+            //TextBox player1NameBox = (TextBox)FindName("Player1Name_TxtBox");
+            //TextBox player2NameBox = (TextBox)FindName("Player2Name_TxtBox");
             playButton.Visibility = Visibility.Visible;
             player1Label.Visibility = Visibility.Visible;
             player2Label.Visibility = Visibility.Visible;
