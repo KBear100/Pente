@@ -167,7 +167,7 @@ namespace Pente
                 button = (Board_Grid.Children[currentIndex]) as Button;
             }
 
-            button.Background = currentPlayer.playerColor;
+            button.Background = player2.playerColor;
             button.Click -= On_Click;
             if (Check_Win(currentIndex))
             {
@@ -201,8 +201,9 @@ namespace Pente
             if (time == 20)
             {
                 MessageBox.Show("You took to long. You lost your turn.");
-                if (currentPlayer == player1) currentPlayer = player2;
-                else currentPlayer = player1;
+                if (Board.numPlayers == 1) ComputerMove();
+                else if (currentPlayer == player1) currentPlayer = player2;
+                else if (currentPlayer == player2) currentPlayer = player1;
                 time = 0;
             }
         }

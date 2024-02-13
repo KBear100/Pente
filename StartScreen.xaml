@@ -10,8 +10,8 @@
         <Label Content="Pente" HorizontalAlignment="Center" Margin="0,120,0,0" VerticalAlignment="Top" FontSize="100"/>
         <Button Name="Singleplayer_Btn" Click="SingleplayerOnClick" Content="1 Player" HorizontalAlignment="Left" Margin="178,351,0,0" VerticalAlignment="Top" FontSize="24" Width="120" Cursor="Hand"/>
         <Button Name="Multiplayer_Btn" Click="MultiplayerOnClick" Content="2 Players" HorizontalAlignment="Left" Margin="501,351,0,0" VerticalAlignment="Top" FontSize="24" Width="120" Cursor="Hand"/>
-        <TextBox Name="Player1Name_TxtBox" Text="Player 1" HorizontalAlignment="Left" Margin="400,555,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="24" AutomationProperties.HelpText="Player 1 Name" Cursor="Hand" Visibility="Hidden" IsTabStop="False"/>
-        <TextBox Name="Player2Name_TxtBox" Text="Player 2" HorizontalAlignment="Left" Margin="400,636,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="24" AutomationProperties.HelpText="Player 2 Name" Cursor="Hand" Visibility="Hidden"/>
+        <TextBox Name="Player1Name_TxtBox" HorizontalAlignment="Left" Margin="400,555,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="24" AutomationProperties.HelpText="Player 1 Name" Cursor="Hand" Visibility="Hidden" IsTabStop="False"/>
+        <TextBox Name="Player2Name_TxtBox" HorizontalAlignment="Left" Margin="400,636,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="24" AutomationProperties.HelpText="Player 2 Name" Cursor="Hand" Visibility="Hidden"/>
         <Button Name="Play_Btn" Click="PlayOnClick" Content="Play" HorizontalAlignment="Center" Margin="0,710,0,0" VerticalAlignment="Top" FontSize="24" Width="120" Cursor="Hand" Visibility="Hidden"/>
         <Label Name="Player1_Lbl" Content="Player 1 Name:" HorizontalAlignment="Left" Margin="197,551,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Visibility="Hidden"/>
         <Label Name="Player2_Lbl" Content="Player 2 Name:" HorizontalAlignment="Left" Margin="197,632,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Visibility="Hidden"/>

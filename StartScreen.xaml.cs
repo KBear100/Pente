@@ -71,11 +71,13 @@ namespace Pente
             Slider slider = (Slider)FindName("Size_Sld");
             Board.boardSize = (int)slider.Value;
 
-            Board.player1Name = player1NameBox.Text;
+            if(!player1NameBox.Text.Equals(string.Empty)) Board.player1Name = player1NameBox.Text;
+            else Board.player1Name = "Player 1";
 
             if (Board.numPlayers == 2)
             {
-                Board.player2Name = player2NameBox.Text;
+                if (!player2NameBox.Text.Equals(string.Empty)) Board.player2Name = player2NameBox.Text;
+                else Board.player2Name = "Player 2";
             }
             else
             {
