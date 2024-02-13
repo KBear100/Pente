@@ -184,8 +184,8 @@ namespace Pente
 
         public bool Check_ThreeSpaces(int selectedIndex, int x, int y)
         {
-            int centerX = Board.boardSize / 2 + 1;
-            int centerY = Board.boardSize / 2 + 1;
+            int centerX = Board.boardSize / 2 + Board.nonButtons + 1;
+            int centerY = Board.boardSize / 2 + Board.nonButtons - 1;
 
             if ((x < centerX + 3 && x > centerX - 3) && (y < centerY + 3 && y > centerY - 3)) return false;
 
