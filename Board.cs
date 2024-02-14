@@ -11,6 +11,7 @@ namespace Pente
         public static int numPlayers = 0;
         public static string player1Name = string.Empty;
         public static string player2Name = string.Empty;
+        public static string currentPlayerName = string.Empty;
         public static int boardSize = 19;
         public static bool loadedGame = false;
         public static List<int> redIndexs = new List<int>();

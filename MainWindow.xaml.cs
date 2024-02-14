@@ -61,6 +61,14 @@ namespace Pente
             if(Board.loadedGame)
             {
                 firstTurn = false;
+                if(Board.currentPlayerName.Equals(player1.playerName))
+                {
+                    currentPlayer = player1;
+                }
+                else
+                {
+                    currentPlayer = player2;
+                }
                 for (int i = Board.nonButtons; i < Board_Grid.Children.Count; i++)
                 {
                     if (Board.redIndexs.Contains(i))
@@ -534,6 +542,9 @@ namespace Pente
         public void Save_Click(object sender, EventArgs e)
         {
             List<string> saveData = new List<string>();
+            saveData.Add(Board.player1Name);
+            saveData.Add(Board.player2Name);
+            saveData.Add(currentPlayer.ToString());
             saveData.Add(Board.boardSize.ToString());
             saveData.Add("Red");
             for(int i = Board.nonButtons; i < Board_Grid.Children.Count; i++)

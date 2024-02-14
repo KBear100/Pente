@@ -97,6 +97,9 @@ namespace Pente
                 string docPath = Environment.CurrentDirectory;
                 using (StreamReader streamReader = new StreamReader(Path.Combine(docPath, "PenteSaveData.txt")))
                 {
+                    Board.player1Name = streamReader.ReadLine();
+                    Board.player2Name = streamReader.ReadLine();
+                    Board.currentPlayerName = streamReader.ReadLine();
                     Board.boardSize = int.Parse(streamReader.ReadLine());
                     streamReader.ReadLine();
                     string temp = streamReader.ReadLine();
